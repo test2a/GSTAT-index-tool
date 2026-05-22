@@ -258,11 +258,11 @@
     <a href="about.html">About</a>
     <a href="#" id="open-instructions">Instructions</a>
   </div>
-  <div class="tag">Cover · Index · Sections</div>
+  <div class="tag">GSTAT Appeal PDF bundle Index building Tool</div>
   <h1>GSTAT <em>Index</em><br>Tool</h1>
   <p class="subtitle">
-    Detects cover, index, and sections automatically from the index page structure.<br>
-    Cover and index are always downloadable individually — with an option to merge into the first section.
+    Follow the instructions to build the combined PDF document bundle first, then use this tool to split it again.  </br>
+    Functionality is being built into a fork of the Buntool itself so two steps are combined into a single step but til then, this workaround should work.
   </p>
 </header>
 
@@ -271,16 +271,38 @@
   <div class="modal" role="document">
     <button class="close-btn" id="close-instructions">Close</button>
     <h3>How to use GSTAT Index Tool</h3>
-    <ol class="steps">
-      <li><strong>Upload:</strong> Click the upload area or drag &amp; drop a PDF.</li>
-      <li><strong>Scan:</strong> The tool scans the first few pages to detect a cover and the index page.</li>
-      <li><strong>Review:</strong> Check detected sections and file rows in the "02 — Detected Output Files" card. Use "show parsed rows" to inspect parsing.</li>
-      <li><strong>Edit Names:</strong> Click an output name to change the exported filename if needed.</li>
-      <li><strong>Merge Options:</strong> Optionally include the cover or index at the start of the first section by checking the merge box.</li>
-      <li><strong>Export:</strong> Click "Export All PDFs" to generate individual PDFs and any merged file(s). Download results from the "04 — Downloads" card.</li>
-      <li><strong>Re-scan:</strong> If detection looks wrong, click "↺ Re-scan" to try again.</li>
-    </ol>
-    <p style="margin-top:0.6rem;color:var(--muted);font-size:0.9rem;">Tip: For best results, ensure the index page uses clear serial numbers and column headers (Tab / Title / Date / Page).</p>
+    <div class="readme-instructions">
+      <p>The instructions below are taken directly from the project's README.</p>
+      <ol class="steps">
+        <li>Open <a href="https://buntool.co.uk" target="_blank" rel="noopener">buntool</a> and start building a bundle.</li>
+        <li>Add the coverpage if you want.</li>
+        <li>In bundle title write "Index" and in case name write your case name, assessee vs sto.</li>
+        <li>Create the following section break (change as needed):
+          <ul>
+            <li>Appeal memo</li>
+            <li>Affidavits</li>
+            <li>Order in Original</li>
+            <li>Show Cause notices</li>
+            <li>Order(s) in Appeal</li>
+            <li>Appeal Notices</li>
+            <li>First Appeal</li>
+            <li>Vakalatnama/Authorization</li>
+            <li>Annexures</li>
+            <li>High Court order</li>
+            <li>Payments</li>
+            <li>pre-deposit Challans</li>
+            <li>Any Other documents</li>
+          </ul>
+        </li>
+        <li>Add documents against each section, properly changing their name (e.g., appeal grounds → grounds of appeal; APL-04, DRC-07, OIO, OIA). Upload all relevant documents so one section can have multiple PDFs.</li>
+        <li>Open "advanced Settings" and change Date format to "none" and set printable mode to "off".</li>
+        <li>Click on create bundle and once created, download bundle. This gives you a combined PDF with proper index and page numbering. You can upload this under "other documents" as "combined PDF".</li>
+        <li>Now upload this PDF to the tool here.</li>
+        <li>Then click on Export All PDFs.</li>
+        <li>You can click on "add index to appeal" so the index PDF is also made part of the appeal memo.</li>
+        <li>Download all sections and upload combined documents against each section as accepted by the GSTAT portal website and the combined one as well.</li>
+      </ol>
+    </div>
   </div>
 </div>
 
