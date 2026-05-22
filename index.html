@@ -50,21 +50,32 @@
     color: var(--accent);
   }
 
-  /* Instructions modal */
+  /* Instructions modal (modernized) */
   .modal-backdrop {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; z-index: 50;
+    position: fixed; inset: 0; background: rgba(5,6,8,0.6); display: flex; z-index: 50;
     align-items: center; justify-content: center; padding: 1.5rem;
+    opacity: 0; pointer-events: none; transition: opacity 220ms ease;
+    backdrop-filter: blur(4px);
   }
-  .modal-backdrop.open { display: flex; }
+  .modal-backdrop.open { opacity: 1; pointer-events: auto; }
   .modal {
-    background: var(--surface); border: 1px solid var(--border); color: var(--text);
-    max-width: 780px; width: 100%; border-radius: 6px; padding: 1.2rem 1.4rem;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.6); font-size: 0.95rem; line-height: 1.6;
+    background: linear-gradient(180deg, rgba(24,24,28,0.98), rgba(24,24,28,0.98));
+    border: 1px solid rgba(255,255,255,0.03); color: var(--text);
+    max-width: 800px; width: 100%; border-radius: 12px; padding: 1.4rem 1.6rem;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.7); font-size: 0.98rem; line-height: 1.6;
+    position: relative; max-height: 78vh; overflow: auto;
   }
-  .modal h3 { margin-top: 0; margin-bottom: 0.6rem; font-family: Georgia, serif; }
-  .modal .steps { margin-top: 0.6rem; }
-  .modal .steps li { margin: 0.6rem 0; }
-  .modal .close-btn { background: none; border: 1px solid var(--border); color: var(--muted); padding: 0.35rem 0.6rem; border-radius: 3px; cursor: pointer; float: right; }
+  .modal h3 { margin: 0 0 0.6rem 0; font-family: Georgia, serif; color: var(--accent2); font-weight: 600; }
+  .modal .steps { margin-top: 0.6rem; padding-left: 1.05rem; }
+  .modal .steps li { margin: 0.6rem 0; padding-left: 0.35rem; }
+  .modal .steps li::marker { color: var(--accent); font-weight: 700; }
+  .modal .close-btn {
+    position: absolute; top: 10px; right: 10px; border: none; background: transparent;
+    color: var(--muted); padding: 6px 8px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;
+  }
+  .modal .close-btn:hover { background: rgba(255,255,255,0.02); color: var(--accent2); }
+  .modal .readme-instructions p { margin-bottom: 0.6rem; color: var(--muted); }
+  .modal ul { margin: 0.25rem 0 0.8rem 1rem; }
 
   .tag {
     font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
