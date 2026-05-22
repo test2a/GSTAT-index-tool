@@ -3,12 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDF Section Splitter</title>
+<title>GSTAT Index Tool</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,700;1,300&display=swap');
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -19,7 +17,7 @@
 
   body {
     background: var(--bg); color: var(--text);
-    font-family: 'DM Mono', monospace;
+    font-family: 'Courier New', Courier, monospace;
     min-height: 100vh; display: flex; flex-direction: column;
     align-items: center; padding: 3rem 1.5rem; overflow-x: hidden;
   }
@@ -35,13 +33,30 @@
   header, .card { position: relative; z-index: 1; }
   header { width: 100%; max-width: 800px; margin-bottom: 3rem; }
 
+  .nav-links {
+    display: flex; gap: 2rem; margin-bottom: 2rem; font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .nav-links a {
+    color: var(--muted); text-decoration: none; transition: color 0.15s;
+  }
+
+  .nav-links a:hover {
+    color: var(--accent2);
+  }
+
+  .nav-links a.active {
+    color: var(--accent);
+  }
+
   .tag {
     font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
     color: var(--accent); border: 1px solid var(--accent);
     display: inline-block; padding: 0.2em 0.7em; margin-bottom: 1.2rem;
   }
   h1 {
-    font-family: 'Fraunces', serif; font-size: clamp(2rem, 5vw, 3.2rem);
+    font-family: Georgia, serif; font-size: clamp(2rem, 5vw, 3.2rem);
     font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
   }
   h1 em { font-style: italic; color: var(--accent); }
@@ -92,7 +107,7 @@
 
   .raw-toggle {
     background: none; border: none; color: var(--muted);
-    font-family: 'DM Mono', monospace; font-size: 0.63rem;
+    font-family: 'Courier New', Courier, monospace; font-size: 0.63rem;
     cursor: pointer; text-decoration: underline; padding: 0;
   }
   .raw-toggle:hover { color: var(--accent2); }
@@ -160,7 +175,7 @@
   .sec-file-pg   { opacity: 0.5; flex-shrink: 0; }
 
   .btn {
-    font-family: 'DM Mono', monospace; font-size: 0.78rem;
+    font-family: 'Courier New', Courier, monospace; font-size: 0.78rem;
     padding: 0.65rem 1.4rem; border-radius: 2px; cursor: pointer;
     transition: all 0.15s; border: none; letter-spacing: 0.04em;
   }
@@ -221,6 +236,10 @@
 <body>
 
 <header>
+  <div class="nav-links">
+    <a href="index.html" class="active">PDF Splitter</a>
+    <a href="about.html">About</a>
+  </div>
   <div class="tag">Cover · Index · Sections</div>
   <h1>PDF <em>Section</em><br>Splitter</h1>
   <p class="subtitle">

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - GSTAT Index Tool</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e0e10; --surface: #18181c; --border: #2a2a32;
+    --accent: #c8f060; --accent2: #60c8f0;
+    --text: #e8e8ec; --muted: #666680; --danger: #f06060; --warn: #f0b860;
+  }
+
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; padding: 3rem 1.5rem; overflow-x: hidden;
+  }
+
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 80% 10%, rgba(200,240,96,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 10% 80%, rgba(96,200,240,0.05) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  header, .card { position: relative; z-index: 1; }
+  header { width: 100%; max-width: 800px; margin-bottom: 3rem; }
+
+  .nav-links {
+    display: flex; gap: 2rem; margin-bottom: 2rem; font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .nav-links a {
+    color: var(--muted); text-decoration: none; transition: color 0.15s;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .nav-links a:hover {
+    color: var(--accent2);
+  }
+
+  .nav-links a.active {
+    color: var(--accent);
+  }
+
+  .tag {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--accent);
+    display: inline-block; padding: 0.2em 0.7em; margin-bottom: 1.2rem;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif; font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+  }
+
+  h1 em { font-style: italic; color: var(--accent); }
+
+  h2 {
+    font-family: Georgia, serif; font-size: 1.8rem;
+    font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+    margin-bottom: 1.2rem; margin-top: 2rem;
+  }
+
+  h2:first-child { margin-top: 0; }
+
+  .subtitle { margin-top: 0.8rem; color: var(--muted); font-size: 0.8rem; line-height: 1.6; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 2px; padding: 2rem;
+    width: 100%; max-width: 800px; margin-bottom: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1.2rem; padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-content {
+    line-height: 1.8; font-size: 0.85rem; color: var(--text);
+  }
+
+  .about-content p {
+    margin-bottom: 1rem;
+  }
+
+  .org-info {
+    background: rgba(200,240,96,0.05); border: 1px solid rgba(200,240,96,0.2);
+    border-radius: 2px; padding: 1.5rem; margin: 1.5rem 0;
+  }
+
+  .org-info strong {
+    color: var(--accent);
+  }
+
+  .org-detail {
+    margin-bottom: 0.8rem; display: flex; flex-direction: column;
+  }
+
+  .org-detail-label {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); margin-bottom: 0.3rem;
+  }
+
+  .org-detail-value {
+    font-size: 0.95rem; color: var(--text);
+  }
+
+  .services {
+    display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0;
+  }
+
+  .service-item {
+    display: flex; align-items: flex-start; gap: 0.5rem;
+    padding: 0.6rem; background: rgba(96,200,240,0.04);
+    border-left: 2px solid var(--accent2); border-radius: 1px;
+  }
+
+  .service-icon {
+    flex-shrink: 0; color: var(--accent2); font-weight: bold;
+  }
+
+  .service-text {
+    font-size: 0.85rem; color: var(--text);
+  }
+
+  .website-link {
+    display: inline-block; margin-top: 0.5rem; padding: 0.6rem 1.2rem;
+    background: var(--accent); color: var(--bg); border-radius: 2px;
+    text-decoration: none; font-size: 0.8rem; font-weight: 500;
+    transition: background 0.15s;
+  }
+
+  .website-link:hover {
+    background: #d9ff6e;
+  }
+
+  .open-source-badge {
+    background: rgba(176,130,240,0.15); border: 1px solid rgba(176,130,240,0.3);
+    color: #b082f0; padding: 0.8rem 1rem; border-radius: 2px;
+    font-size: 0.78rem; line-height: 1.6; margin-bottom: 1.5rem;
+  }
+
+  .open-source-badge strong {
+    color: #b082f0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-links">
+    <a href="index.html">PDF Splitter</a>
+    <a href="about.html" class="active">About</a>
+  </div>
+  <div class="tag">About</div>
+  <h1>About This <em>Tool</em></h1>
+  <p class="subtitle">
+    An open source PDF processing tool developed by<br>
+    M/S Ferdous Associates, Srinagar
+  </p>
+</header>
+
+<div class="card">
+  <div class="card-title">Open Source License</div>
+  <div class="open-source-badge">
+    <strong>This tool is developed and distributed under an open source license.</strong><br>
+    <br>
+    You are free to use, modify, and distribute this software in accordance with the terms of the license.
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">About Ferdous Associates</div>
+  <div class="about-content">
+    <p>
+      <strong>M/S Ferdous Associates</strong> is a professional services firm providing comprehensive legal, financial, and intellectual property expertise.
+    </p>
+
+    <div class="org-info">
+      <div class="org-detail">
+        <div class="org-detail-label">Organization Name</div>
+        <div class="org-detail-value">M/S Ferdous Associates</div>
+      </div>
+      <div class="org-detail">
+        <div class="org-detail-label">Address</div>
+        <div class="org-detail-value">
+          409, Auqaf Building<br>
+          Budshah Chowk<br>
+          Srinagar, J&K - 190001
+        </div>
+      </div>
+      <div class="org-detail">
+        <div class="org-detail-label">Website</div>
+        <div class="org-detail-value">
+          <a href="https://ferdous.in" class="website-link" target="_blank">Visit ferdous.in</a>
+        </div>
+      </div>
+    </div>
+
+    <h2>Services</h2>
+    <p>We specialize in the following areas of professional practice:</p>
+    <div class="services">
+      <div class="service-item">
+        <div class="service-icon">⚖</div>
+        <div class="service-text"><strong>Legal Advocacy</strong> — Comprehensive legal representation and consultation</div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">💼</div>
+        <div class="service-text"><strong>Tax Consulting</strong> — Expert tax planning and compliance services</div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">🔐</div>
+        <div class="service-text"><strong>Intellectual Property Consulting</strong> — IP strategy, protection, and portfolio management</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Contact</div>
+  <div class="about-content">
+    <p>
+      For inquiries about this tool or our services, please visit our website at
+      <a href="https://ferdous.in" style="color: var(--accent); text-decoration: none;" target="_blank">ferdous.in</a>
+      or reach out through the contact information on our website.
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
