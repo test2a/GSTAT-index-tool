@@ -50,6 +50,22 @@
     color: var(--accent);
   }
 
+  /* Instructions modal */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; z-index: 50;
+    align-items: center; justify-content: center; padding: 1.5rem;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: var(--surface); border: 1px solid var(--border); color: var(--text);
+    max-width: 780px; width: 100%; border-radius: 6px; padding: 1.2rem 1.4rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6); font-size: 0.95rem; line-height: 1.6;
+  }
+  .modal h3 { margin-top: 0; margin-bottom: 0.6rem; font-family: Georgia, serif; }
+  .modal .steps { margin-top: 0.6rem; }
+  .modal .steps li { margin: 0.6rem 0; }
+  .modal .close-btn { background: none; border: 1px solid var(--border); color: var(--muted); padding: 0.35rem 0.6rem; border-radius: 3px; cursor: pointer; float: right; }
+
   .tag {
     font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
     color: var(--accent); border: 1px solid var(--accent);
@@ -149,6 +165,7 @@
     outline: none; width: 100%; padding: 0.1rem 0.2rem;
     transition: border-color 0.15s;
   }
+  .item-name input { font-family: 'Courier New', Courier, monospace; }
   .item-name input:focus { border-bottom-color: var(--accent); }
   .item-meta { font-size: 0.65rem; color: var(--muted); margin-top: 0.2rem; }
 
@@ -215,7 +232,7 @@
   .dl-meta { font-size: 0.67rem; color: var(--muted); }
   .btn-dl {
     background: none; border: 1px solid var(--accent); color: var(--accent);
-    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    font-family: 'Courier New', Courier, monospace; font-size: 0.72rem;
     padding: 0.4rem 1rem; cursor: pointer; border-radius: 2px;
     transition: all 0.15s; text-decoration: none; display: inline-block;
     white-space: nowrap; flex-shrink: 0;
@@ -239,6 +256,7 @@
   <div class="nav-links">
     <a href="index.html" class="active">GSTAT Index Tool</a>
     <a href="about.html">About</a>
+    <a href="#" id="open-instructions">Instructions</a>
   </div>
   <div class="tag">Cover · Index · Sections</div>
   <h1>GSTAT <em>Index</em><br>Tool</h1>
@@ -247,6 +265,24 @@
     Cover and index are always downloadable individually — with an option to merge into the first section.
   </p>
 </header>
+
+<!-- Instructions Modal -->
+<div class="modal-backdrop" id="instructions-modal" aria-hidden="true">
+  <div class="modal" role="document">
+    <button class="close-btn" id="close-instructions">Close</button>
+    <h3>How to use GSTAT Index Tool</h3>
+    <ol class="steps">
+      <li><strong>Upload:</strong> Click the upload area or drag &amp; drop a PDF.</li>
+      <li><strong>Scan:</strong> The tool scans the first few pages to detect a cover and the index page.</li>
+      <li><strong>Review:</strong> Check detected sections and file rows in the "02 — Detected Output Files" card. Use "show parsed rows" to inspect parsing.</li>
+      <li><strong>Edit Names:</strong> Click an output name to change the exported filename if needed.</li>
+      <li><strong>Merge Options:</strong> Optionally include the cover or index at the start of the first section by checking the merge box.</li>
+      <li><strong>Export:</strong> Click "Export All PDFs" to generate individual PDFs and any merged file(s). Download results from the "04 — Downloads" card.</li>
+      <li><strong>Re-scan:</strong> If detection looks wrong, click "↺ Re-scan" to try again.</li>
+    </ol>
+    <p style="margin-top:0.6rem;color:var(--muted);font-size:0.9rem;">Tip: For best results, ensure the index page uses clear serial numbers and column headers (Tab / Title / Date / Page).</p>
+  </div>
+</div>
 
 <!-- 01 Upload -->
 <div class="card">
@@ -757,6 +793,20 @@ function setProgress(pct) { document.getElementById('progress-fill').style.width
 function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+// Instructions modal handlers
+(function(){
+  const modal = document.getElementById('instructions-modal');
+  const openLink = document.getElementById('open-instructions');
+  const closeBtn = document.getElementById('close-instructions');
+  function openInstructions(e){ if (e) e.preventDefault(); if (!modal) return; modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); }
+  function closeInstructions(){ if (!modal) return; modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
+  if (openLink) openLink.addEventListener('click', openInstructions);
+  if (closeBtn) closeBtn.addEventListener('click', closeInstructions);
+  if (modal) {
+    modal.addEventListener('click', e => { if (e.target === modal) closeInstructions(); });
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal && modal.classList.contains('open')) closeInstructions(); });
+})();
 function toggleRaw() {
   const box = document.getElementById('raw-box');
   const btn = document.querySelector('.raw-toggle');
